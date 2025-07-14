@@ -1,73 +1,167 @@
-# Welcome to your Lovable project
+# Photo Gallery Web App
 
-## Project info
+A beautiful, secure photo organization webapp with Google authentication and Google Sheets integration. Built with React, Material UI, and modern web technologies.
 
-**URL**: https://lovable.dev/projects/165c254f-19f7-46a5-8ab2-0514d6a5efe0
+![Photo Gallery Demo](https://github.com/user-attachments/assets/photo-gallery-preview.png)
 
-## How can I edit this code?
+## ✨ Features
 
-There are several ways of editing your application.
+- **🔐 Secure Google OAuth Authentication** - Only authorized users can access
+- **📊 Google Sheets Backend** - Manage photo metadata in a spreadsheet
+- **🎨 Beautiful Material UI Design** - Responsive, Polaroid-style photo cards
+- **❤️ Favorite System** - Mark photos as favorites with animated heart icons
+- **🔍 Real-time Search** - Filter photos by name or description
+- **📝 Photo Management** - Edit photo names and descriptions
+- **📱 Responsive Design** - Works perfectly on desktop and mobile
+- **⚡ Fast Loading** - Skeleton loaders and optimized image handling
+- **🎭 Pagination** - Handle large photo collections efficiently
 
-**Use Lovable**
+## 🚀 Quick Start
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/165c254f-19f7-46a5-8ab2-0514d6a5efe0) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 1. Clone and Install
+```bash
+git clone <your-repo-url>
+cd photo-gallery
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### 2. Setup Google Authentication
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Enable Google Identity API
+3. Create OAuth 2.0 credentials
+4. Update `src/services/googleAuth.ts` with your Client ID:
+   ```typescript
+   const CLIENT_ID = 'your-google-client-id.apps.googleusercontent.com';
+   ```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 3. Setup Google Sheets
+1. Create a spreadsheet with tabs: **Users** (email column) and **Content** (path, name, favorite, description)
+2. Enable Google Sheets API and get API key
+3. Update `src/components/GalleryPage.tsx` with your credentials:
+   ```typescript
+   const API_KEY = 'your-api-key';
+   const SPREADSHEET_ID = 'your-spreadsheet-id';
+   ```
 
-**Use GitHub Codespaces**
+### 4. Add Your Photos
+1. Place images in `/public/content/` folder
+2. Update `/public/content/index.json` with image paths
+3. Deploy to GitHub Pages or your preferred hosting
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🏗️ Architecture
 
-## What technologies are used for this project?
+```
+src/
+├── components/
+│   ├── App.tsx           # Main app with Material UI theme
+│   ├── LoginPage.tsx     # Google OAuth login interface
+│   ├── GalleryPage.tsx   # Main photo gallery with search
+│   ├── PhotoCard.tsx     # Polaroid-style photo cards
+│   └── PhotoDialog.tsx   # Photo editing modal
+├── services/
+│   ├── googleAuth.ts     # Google OAuth integration
+│   ├── googleSheets.ts   # Google Sheets API client
+│   └── photoContent.ts   # Photo content management
+└── index.css             # Design system with HSL colors
+```
 
-This project is built with:
+## 🎨 Design System
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The app uses a warm, photo-centric color palette with HSL color variables:
+- **Primary**: Warm amber (`hsl(39, 84%, 56%)`)
+- **Background**: Soft cream (`hsl(45, 23%, 97%)`)
+- **Cards**: Pure white with elegant shadows
+- **Favorites**: Heart red (`hsl(0, 84%, 60%)`)
 
-## How can I deploy this project?
+### Customizing Colors
+Edit `src/index.css` to customize the color scheme:
+```css
+:root {
+  --primary: 39 84% 56%;        /* Your brand color */
+  --background: 45 23% 97%;     /* Page background */
+  --card: 0 0% 100%;            /* Card background */
+  /* ... more color variables */
+}
+```
 
-Simply open [Lovable](https://lovable.dev/projects/165c254f-19f7-46a5-8ab2-0514d6a5efe0) and click on Share -> Publish.
+## 🔧 Configuration
 
-## Can I connect a custom domain to my Lovable project?
+### Environment Setup
+No `.env` files needed! All configuration is done in source files:
 
-Yes, you can!
+**Google OAuth**: `src/services/googleAuth.ts`
+```typescript
+const CLIENT_ID = 'your-google-oauth-client-id';
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+**Google Sheets**: `src/components/GalleryPage.tsx`
+```typescript
+const API_KEY = 'your-google-sheets-api-key';
+const SPREADSHEET_ID = 'your-spreadsheet-id';
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Content Management
+Images are served from `/public/content/` with an index file listing all photos:
+
+**`/public/content/index.json`**
+```json
+[
+  "/content/photo1.jpg",
+  "/content/photo2.jpg",
+  "/content/photo3.jpg"
+]
+```
+
+## 🔒 Security Features
+
+- **Client-side OAuth** - Secure Google authentication
+- **Email Whitelist** - Only authorized users in Google Sheets can access
+- **Public API Keys** - Uses only client-safe, public API keys
+- **HTTPS Only** - All API communication over HTTPS
+- **No Passwords** - No password storage or management needed
+
+## 📱 Responsive Design
+
+The gallery adapts to all screen sizes:
+- **Mobile**: 1 column layout
+- **Tablet**: 2 column layout  
+- **Desktop**: 3-4 column layout
+- **Large screens**: Up to 4 columns
+
+## 🚀 Deployment
+
+### GitHub Pages
+1. Push code to GitHub repository
+2. Enable GitHub Pages in repository settings
+3. Update OAuth credentials with your GitHub Pages URL
+4. Your app will be live at `https://yourusername.github.io/yourrepo`
+
+### Other Hosting
+This is a static React app that can be deployed anywhere:
+- Vercel, Netlify, AWS S3, etc.
+- Just run `npm run build` and deploy the `dist/` folder
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- Built with [React](https://reactjs.org/) and [Material UI](https://mui.com/)
+- Authentication via [Google Identity Services](https://developers.google.com/identity)
+- Backend powered by [Google Sheets API](https://developers.google.com/sheets/api)
+- Styled with custom CSS design system
+- Icons from [Material UI Icons](https://mui.com/material-ui/material-icons/)
+
+---
+
+**Built with ❤️ using modern web technologies**

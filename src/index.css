@@ -2,95 +2,113 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Photo Gallery Design System - Material UI inspired with warm photo-centric palette */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Photo gallery warm palette */
+    --background: 45 23% 97%;
+    --foreground: 24 20% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 24 20% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 24 20% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Warm amber primary for photo app */
+    --primary: 39 84% 56%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 39 84% 48%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Soft cream secondary */
+    --secondary: 45 25% 94%;
+    --secondary-foreground: 24 20% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted beige tones */
+    --muted: 40 15% 92%;
+    --muted-foreground: 25 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Warm accent */
+    --accent: 35 77% 88%;
+    --accent-foreground: 24 20% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Error red */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders and inputs */
+    --border: 40 15% 85%;
+    --input: 40 15% 85%;
+    --ring: 39 84% 56%;
 
-    --radius: 0.5rem;
+    /* Photo gallery specific colors */
+    --favorite: 0 84% 60%;
+    --favorite-filled: 0 100% 50%;
+    --skeleton: 40 10% 90%;
+    --polaroid-shadow: 0 0% 0%;
 
-    --sidebar-background: 0 0% 98%;
+    /* Gradients for beautiful effects */
+    --gradient-warm: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(35 60% 60%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(40 20% 96%) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsla(0 0% 0% / 0.3) 100%);
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Shadows for depth */
+    --shadow-card: 0 4px 20px hsla(var(--foreground) / 0.08);
+    --shadow-polaroid: 0 8px 32px hsla(var(--foreground) / 0.12);
+    --shadow-floating: 0 12px 40px hsla(var(--foreground) / 0.15);
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --radius: 0.75rem;
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark mode for photo gallery - warm darker tones */
+    --background: 24 20% 8%;
+    --foreground: 45 15% 92%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 24 15% 12%;
+    --card-foreground: 45 15% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 24 15% 12%;
+    --popover-foreground: 45 15% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 39 84% 56%;
+    --primary-foreground: 24 20% 8%;
+    --primary-hover: 39 84% 48%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 24 10% 15%;
+    --secondary-foreground: 45 15% 85%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 24 8% 18%;
+    --muted-foreground: 25 10% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 35 30% 25%;
+    --accent-foreground: 45 15% 85%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 24 8% 22%;
+    --input: 24 8% 22%;
+    --ring: 39 84% 56%;
+
+    --favorite: 0 84% 60%;
+    --favorite-filled: 0 100% 50%;
+    --skeleton: 24 8% 20%;
+
+    /* Dark gradients */
+    --gradient-warm: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(35 60% 40%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(24 15% 10%) 100%);
+    
+    /* Dark shadows */
+    --shadow-card: 0 4px 20px hsla(0 0% 0% / 0.3);
+    --shadow-polaroid: 0 8px 32px hsla(0 0% 0% / 0.4);
+    --shadow-floating: 0 12px 40px hsla(0 0% 0% / 0.5);
   }
 }
 
@@ -100,6 +118,35 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    background: hsl(var(--background));
+  }
+}
+
+@layer components {
+  /* Photo gallery specific components */
+  .polaroid-card {
+    @apply bg-card border border-border rounded-xl shadow-polaroid transition-all duration-300;
+    @apply hover:shadow-floating hover:-translate-y-1;
+  }
+  
+  .heart-button {
+    @apply transition-all duration-200 hover:scale-110;
+  }
+  
+  .heart-button.favorited {
+    @apply animate-heart-beat text-favorite-filled;
+  }
+  
+  .skeleton-loader {
+    @apply bg-skeleton animate-skeleton-pulse rounded;
+  }
+  
+  .fade-in {
+    @apply animate-fade-in;
+  }
+  
+  .search-focus {
+    @apply ring-2 ring-primary ring-opacity-50 border-primary;
   }
 }

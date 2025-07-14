@@ -27,6 +27,17 @@ class GoogleAuthService {
   private isInitialized: boolean = false;
   private authStateCallbacks: ((state: AuthState) => void)[] = [];
 
+  // Replace this with your actual Google OAuth Client ID
+  // Get it from: https://console.cloud.google.com/
+  
+  // TODO: REPLACE THIS WITH YOUR REAL GOOGLE OAUTH CLIENT ID
+  // Get it from: https://console.cloud.google.com/
+  // Go to: APIs & Services > Credentials > Create Credentials > OAuth 2.0 Client IDs
+  // Application type: Web application
+  // Add your domain to "Authorized JavaScript origins"
+  // Copy the Client ID and replace the placeholder below:
+  private readonly PLACEHOLDER_CLIENT_ID = 'your-google-client-id.apps.googleusercontent.com';
+
   // Initialize Google Identity Services
   async initialize(clientId: string): Promise<void> {
     this.clientId = clientId;
@@ -135,6 +146,7 @@ class GoogleAuthService {
         'admin@example.com',
         'user1@gmail.com',
         'user2@gmail.com',
+        'jonatasemidio@gmail.com', // Your email - you can access once OAuth is set up
         // Add more authorized emails here
       ];
 
